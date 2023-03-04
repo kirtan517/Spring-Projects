@@ -7,13 +7,13 @@ import java.util.List;
 
 @Data
 public class TacoOrder {
-    private String diliveryName;
-    private String diliveryStreet;
-    private String diliveryCity;
-    private String diliveryState;
-    private String diliveryZip;
+    private String name;
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
 
-    private String ccnumber;
+    private String ccNumber;
     private String ccExpiration;
     private String ccCVV;
 

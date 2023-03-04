@@ -6,10 +6,7 @@ import com.kirtan.tacoonline.TacoOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import com.kirtan.tacoonline.Ingredient.Type;
 
 import java.util.Arrays;
@@ -47,7 +44,7 @@ public class DesignTacoController {
     return new TacoOrder();
     }
 
-    @ModelAttribute("taco")
+    @ModelAttribute(name = "taco")
     public Taco taco(){
         return new Taco();
     }
@@ -59,6 +56,13 @@ public class DesignTacoController {
 
     private Iterable<Ingredient> filterbyType(List<Ingredient> ingredients,Type type){
         return ingredients.stream().filter(x->x.getType().equals(type)).collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder){
+        tacoOrder.addTaco(taco);
+        log.info("Processing taco : {}",taco);
+        return "redirect:/orders/current";
     }
 
 }
