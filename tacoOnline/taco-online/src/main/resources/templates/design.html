@@ -13,12 +13,12 @@
 <img th:src="@{/images/TacoCloud.png}"/>
 
 <!-- tag::formTag[] -->
-<form method="POST" th:object="${design}">
+<form method="POST" th:object="${taco}">
   <!-- end::all[] -->
 
-<!--  <span class="validationError"-->
-<!--        th:if="${#fields.hasErrors('ingredients')}"-->
-<!--        th:errors="*{ingredients}">Ingredient Error</span>-->
+  <span class="validationError"
+        th:if="${#fields.hasErrors('ingredients')}"
+        th:errors="*{ingredients}">Ingredient Error</span>
 
   <!-- tag::all[] -->
   <div class="grid">
@@ -70,15 +70,15 @@
   <div>
 
 
-<!--    <h3>Name your taco creation:</h3>-->
-<!--    <input type="text" th:field="*{name}"/>-->
-<!--    &lt;!&ndash; end::all[] &ndash;&gt;-->
-<!--    <span th:text="${#fields.hasErrors('name')}">XXX</span>-->
-<!--    <span class="validationError"-->
-<!--          th:if="${#fields.hasErrors('name')}"-->
-<!--          th:errors="*{name}">Name Error</span>-->
-<!--    &lt;!&ndash; tag::all[] &ndash;&gt;-->
-<!--    <br/>-->
+    <h3>Name your taco creation:</h3>
+    <input type="text" th:field="*{name}"/>
+    <!-- end::all[] -->
+    <span th:text="${#fields.hasErrors('name')}">XXX</span>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}">Name Error</span>
+    <!-- tag::all[] -->
+    <br/>
 
     <button>Submit your taco</button>
   </div>

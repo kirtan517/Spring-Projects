@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import java.util.List;
 
 @Data
-
 public class Taco {
 
     @Nonnull

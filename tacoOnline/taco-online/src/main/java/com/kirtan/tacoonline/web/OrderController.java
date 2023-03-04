@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import com.kirtan.tacoonline.TacoOrder;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Slf4j
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
-public class OrderController implements WebMvcConfigurer {
+public class OrderController {
+
 
     @GetMapping("/current")
     public String orderForm() {
@@ -26,17 +28,16 @@ public class OrderController implements WebMvcConfigurer {
     @ModelAttribute
     public void addTacoOrderToModel(Model model){
         model.addAttribute("order", new TacoOrder());
-        log.info(model.toString());
     }
 
     @PostMapping
-    public String processOrder(@Valid TacoOrder order , BindingResult errors , SessionStatus sessionStatus, Model model){
+    public String processOrder(@Valid TacoOrder order , BindingResult errors, Model model ){
 
         if(errors.hasErrors()){
-            log.info("inside the error " , model.toString());
+            log.info("inside the error ");
+            log.info("This is the current model " , model);
             return "orderForm";
         }
-        sessionStatus.setComplete();
         return "redirect:/";
     }
 

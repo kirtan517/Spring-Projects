@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
 @Slf4j
-public class DesignTacoController implements WebMvcConfigurer {
+public class DesignTacoController {
 
     @ModelAttribute
     public void addIngredientsToModel(Model model){
@@ -64,14 +64,9 @@ public class DesignTacoController implements WebMvcConfigurer {
         return ingredients.stream().filter(x->x.getType().equals(type)).collect(Collectors.toList());
     }
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/orders/current").setViewName("orders");
-    }
 
     @PostMapping
     public String processTaco(@Valid Taco taco, BindingResult errors, @ModelAttribute TacoOrder tacoOrder, Model model){
-        log.info("Inside the errors" , errors);
         if (errors.hasErrors()) {
             return "design";
         }
