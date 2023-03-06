@@ -7,6 +7,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -19,4 +20,6 @@ public class Taco {
     @Nonnull
     @Size(min=2, message="You must choose at least 1 ingredient")
     private List<Ingredient> ingredients;
+
+    private Date createdAt = new Date();
 }
