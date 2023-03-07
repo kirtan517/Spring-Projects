@@ -1,7 +1,9 @@
 package com.kirtan.tacoonline.web;
 
+import com.kirtan.tacoonline.data.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -18,6 +20,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SessionAttributes("tacoOrder")
 public class OrderController {
 
+    private OrderRepository orderRepository;
+    @Autowired
+    public OrderController(OrderRepository orderRepository){
+        this.orderRepository = orderRepository;
+    }
+
 
     @GetMapping("/current")
     public String orderForm() {
@@ -31,13 +39,13 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOrder(@Valid TacoOrder order , BindingResult errors, Model model ){
+    public String processOrder(@Valid TacoOrder order , BindingResult errors, SessionStatus sessionStatus ){
 
         if(errors.hasErrors()){
-            log.info("inside the error ");
-            log.info("This is the current model " , model);
             return "orderForm";
         }
+        orderRepository.save(order);
+        sessionStatus.setComplete();
         return "redirect:/";
     }
 

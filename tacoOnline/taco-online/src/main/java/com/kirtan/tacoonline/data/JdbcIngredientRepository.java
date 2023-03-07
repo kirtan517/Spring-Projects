@@ -2,15 +2,17 @@ package com.kirtan.tacoonline.data;
 
 import com.kirtan.tacoonline.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
-import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 @Repository
+@Transactional
 public class JdbcIngredientRepository implements IngredientRepository{
 
     private JdbcTemplate jdbcTemplate;

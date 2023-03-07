@@ -24,10 +24,14 @@ import java.util.stream.Collectors;
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepository;
+//    private TacoRepository designRepo
 
     @Autowired
-    public DesignTacoController(IngredientRepository ingredientRepository) {
+    public  DesignTacoController(IngredientRepository ingredientRepository
+//                                 TacoRepository designRepo
+    ) {
         this.ingredientRepository = ingredientRepository;
+//        this.designRepo = designRepo;
     }
 
 
@@ -52,6 +56,7 @@ public class DesignTacoController {
 
     @GetMapping
     public String showDesignForm(Model model){
+        log.info("inside the showDesignForm");
         log.info(model.toString());
         return "design";
     }

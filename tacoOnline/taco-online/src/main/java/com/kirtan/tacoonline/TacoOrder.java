@@ -1,6 +1,8 @@
 package com.kirtan.tacoonline;
 
+import jakarta.annotation.Generated;
 import jakarta.annotation.Nonnull;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -15,6 +17,9 @@ import java.util.List;
 
 @Data
 public class TacoOrder {
+
+    private long id;
+    
     @NotBlank(message="Delivery name is required")
     private String name;
     @NotBlank(message="Street is required")
