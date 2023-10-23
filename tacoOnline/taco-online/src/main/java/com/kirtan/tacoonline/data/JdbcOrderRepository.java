@@ -13,10 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Types;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 
 @Repository
 @Transactional
@@ -36,13 +34,20 @@ public class JdbcOrderRepository implements OrderRepository {
 
    }
 
-   private long saveTaco(long orderId ,Taco taco){
-        taco.setCreatedAt(new Date());
+
+   public long saveTaco(long orderId ,Taco taco){
+
+       System.out.println(orderId);
+
         PreparedStatementCreatorFactory pscf = new PreparedStatementCreatorFactory(
                 "insert into Taco (name,created_at,taco_order_key)"+
-                "value (?,?,?,?)",Types.VARCHAR,Types.TIMESTAMP,Type.LONG
+                "value (?,?,?)",Types.VARCHAR,Types.TIMESTAMP,Types.BIGINT
         );
+
         pscf.setReturnGeneratedKeys(true);
+
+       taco.setCreatedAt(new Date());
+
         PreparedStatementCreator psc = pscf.newPreparedStatementCreator(Arrays.asList(
                 taco.getName(),
                 taco.getCreatedAt(),
@@ -50,8 +55,16 @@ public class JdbcOrderRepository implements OrderRepository {
         ));
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcOperations.update(psc,keyHolder);
+       System.out.println(keyHolder);
+       System.out.println(taco);
+
         long tacoId = keyHolder.getKey().longValue();
         taco.setId(tacoId);
+
+       Map<String, Object> values = new HashMap<>();
+       values.put("Taco_Order", orderId);
+       values.put("Taco", taco.getId());
+
         saveIngredientRefs(tacoId,taco.getIngredients());
        return tacoId;
    }

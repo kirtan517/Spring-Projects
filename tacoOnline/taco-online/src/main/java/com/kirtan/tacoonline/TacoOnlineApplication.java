@@ -18,32 +18,12 @@ import javax.sql.DataSource;
 public class TacoOnlineApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {
-
-        ConfigurableApplicationContext context = SpringApplication.run(TacoOnlineApplication.class, args);
-        DataSource datasource = (DataSource) context.getBean("dataSource");
-        System.out.println(datasource);
-
-    }
-    @Bean
-    public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-
-        return sessionFactory;
+        SpringApplication.run(TacoOnlineApplication.class, args);
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("home"); }
-
-
-
-    @Bean
-    public DataSource dataSource(){
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        return dataSource;
-    }
-
-
 
 
 }
