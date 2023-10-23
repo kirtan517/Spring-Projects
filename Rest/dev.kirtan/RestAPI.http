@@ -1,0 +1,46 @@
+###
+GET http://localhost:8080/api/content
+
+###
+GET http://localhost:8080/api/content/1
+
+###
+GET http://localhost:8080/api/content/100
+
+###
+POST http://localhost:8080/api/content
+Content-Type: application/json
+
+  {
+    "id": 3,
+    "title": "asdfeasdfdffe",
+    "desc": "There is nothing to Show will come to an end  ",
+    "status": "IDEA",
+    "contentType": "ARTICLE",
+    "dateCreated": "2023-10-22T19:44:01.437982",
+    "dateUpdated": null,
+    "url": ""
+  }
+
+###
+PUT http://localhost:8080/api/content/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "This is End or the begining",
+  "desc": "THERE IS NOTHING TO SHOW HERE",
+  "status": "IDEA",
+  "contentType": "ARTICLE",
+  "dateCreated": "2023-10-22T19:44:01.437982",
+  "dateUpdated": null,
+  "url": ""
+}
+
+###
+DELETE http://localhost:8080/api/content/2
+
+
+
+
+
